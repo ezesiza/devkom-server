@@ -26,7 +26,7 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+A backend for a social application in Nestjs/PostgreSQL . 
 
 ## Installation
 
@@ -62,13 +62,13 @@ $ npm run test:cov
 
 ## Support
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+devkom is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please feel free to fork and make changes as you wish.
 
 ## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- Author - [Eze Ihekwoaba]
+- Twitter - (https://twitter.com/ezesiza)
+- Linkedin - (https://www.linkedin.com/in/ezejike-devworks/)
 
 ## License
 
