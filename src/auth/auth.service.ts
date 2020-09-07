@@ -1,25 +1,24 @@
-import { Injectable, UnauthorizedException, Logger } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
-import { InjectRepository } from '@nestjs/typeorm';
-import { UserRepository } from './user.repository';
-import { AuthCredentialsDto } from './dto/auth-credentials.dto';
-import { JwtPayload } from './jwt-payload.interface';
-import { User } from './user.entity';
-import { JwtStrategy } from './jwt.strategy';
+import { Injectable, UnauthorizedException, Logger } from "@nestjs/common";
+import { JwtService } from "@nestjs/jwt";
+import { InjectRepository } from "@nestjs/typeorm";
+import { UserRepository } from "./user.repository";
+import { AuthCredentialsDto } from "./dto/auth-credentials.dto";
+import { IJwtPayload } from "./jwt-payload.interface";
+import { User } from "./user.entity";
+import { JwtStrategy } from "./jwt.strategy";
 
-import * as config from 'config';
+import * as config from "config";
 
-const jwtConfig = config.get('jwt');
+const jwtConfig: any = config.get("jwt");
 
 @Injectable()
 export class AuthService {
-  private logger = new Logger('AuthService');
+  private logger = new Logger("AuthService");
 
   constructor(
     @InjectRepository(UserRepository)
     private userRepository: UserRepository,
     private jwtService: JwtService,
-    private jwtStrategy: JwtStrategy,
   ) {}
 
   async signUp(authCredentialsDto: AuthCredentialsDto): Promise<void> {
@@ -28,20 +27,23 @@ export class AuthService {
 
   async signIn(
     authCredentialsDto: AuthCredentialsDto,
-  ): Promise<{ accessToken: string; user: User; expiresIn: string; decoded }> {
-    const authData = await this.userRepository.validateUserPassword(
+  ): Promise<{
+    accessToken: string;
+    user: User;
+    expiresIn: string;
+    decoded: any;
+  }> {
+    const authData: any = await this.userRepository.validateUserPassword(
       authCredentialsDto,
     );
-    // console.log('authData', authData);
 
     if (!authData) {
-      throw new UnauthorizedException('Invalid credentials');
+      throw new UnauthorizedException("Invalid credentials");
     }
 
-    const payload: JwtPayload = { email: authData.user.email };
-    const accessToken = await this.jwtService.sign(payload);
-    const decoded = await this.jwtService.decode(accessToken);
-    // console.log('decoded', decoded);
+    const payload: IJwtPayload = { email: authData.user.email };
+    const accessToken: any = await this.jwtService.sign(payload);
+    const decoded: any = await this.jwtService.decode(accessToken);
     return {
       accessToken,
       user: authData.user,

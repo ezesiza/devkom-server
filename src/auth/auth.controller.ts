@@ -6,30 +6,30 @@ import {
   UseGuards,
   Req,
   Get,
-} from '@nestjs/common';
-import { AuthCredentialsDto } from './dto/auth-credentials.dto';
-import { AuthService } from './auth.service';
-import { AuthGuard } from '@nestjs/passport';
-import { User } from './user.entity';
-import { GetUser } from './get-user.decorator';
+} from "@nestjs/common";
+import { AuthCredentialsDto } from "./dto/auth-credentials.dto";
+import { AuthService } from "./auth.service";
+import { AuthGuard } from "@nestjs/passport";
+import { User } from "./user.entity";
+import { GetUser } from "./get-user.decorator";
 
-@Controller('auth')
+@Controller("auth")
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @Post('/signup')
+  @Post("/signup")
   signUp(@Body() authCredentialsDto: AuthCredentialsDto): Promise<void> {
     return this.authService.signUp(authCredentialsDto);
   }
 
-  @Post('/signin')
+  @Post("/signin")
   signIn(
     @Body() authCredentialsDto: AuthCredentialsDto,
   ): Promise<{ accessToken: string; user: User }> {
     return this.authService.signIn(authCredentialsDto);
   }
 
-  @Get('/user')
+  @Get("/user")
   @UseGuards(AuthGuard())
   currentUser(@GetUser() user: User) {
     return user;

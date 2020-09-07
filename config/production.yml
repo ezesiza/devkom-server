@@ -1,5 +1,4 @@
 server:
-  # origin: http://nestjs-task-management-frontend.s3-website-eu-west-1.amazonaws.com
   origin: http://localhost:3002
 
 db:
