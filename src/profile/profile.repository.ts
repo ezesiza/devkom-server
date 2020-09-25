@@ -10,10 +10,16 @@ import { UserRepository } from "src/auth/user.repository";
 
 @EntityRepository(Profile)
 export class ProfileRepository extends Repository<Profile> {
-  async getAllProfiles() {
+  async getAllProfiles():Promise<any> {
     const query = this.createQueryBuilder("profile")
       .innerJoinAndSelect("profile.user", "user")
       .getMany();
+    return query;
+
+  }
+
+  async getProfileByUserId(Id:number):Promise<any> {
+    const query = await this.findOne({userId:Id });
     return query;
   }
 
@@ -31,11 +37,11 @@ export class ProfileRepository extends Repository<Profile> {
       website,
     } = profileDto;
 
-    console.log(profileDto)
+    // console.log(profileDto);
     const newProfile:Profile = new Profile();
     newProfile.skills = skills;
     newProfile.handle = handle;
-    newProfile.user = user["user"];
+    newProfile.user = user['user'];
     newProfile.company = company;
     newProfile.location = location;
     newProfile.social = social;

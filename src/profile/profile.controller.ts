@@ -35,7 +35,6 @@ export class ProfileController {
     @GetUser() user: User,
     @Body() profileDto,
   ): Promise<Profile> {
-    // console.log(user);
     return await this.profileService.createProfile(user, profileDto);
   }
   @Post("/editprofile")
@@ -57,5 +56,10 @@ export class ProfileController {
   @Get("/handle/:handle")
   async getProfileByHandle(handle: string) {
     return this.profileService.getProfileByHandle(handle);
+  }
+
+  @Get("/profile-user/user/:id")
+  async getProfileUser(@Param("id", ParseIntPipe) id: number):Promise<any> {
+    return await this.profileService.getProfileByUserId(id);
   }
 }

@@ -23,7 +23,7 @@ export class ProfileService {
     if (users) {
       return users;
     } else {
-      return [0];
+      return [];
     }
   }
 
@@ -44,9 +44,9 @@ export class ProfileService {
     }
   }
 
-  // async getCurrentUser() {
-
-  // }
+  async getProfileByUserId(Id:number):Promise<any> {
+  return await this.profileRepository.getProfileByUserId(Id)
+  }
 
   async createProfile(user: User, profileDto): Promise<Profile> {
     return this.profileRepository.createProfile(user, profileDto);
